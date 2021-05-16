@@ -1,0 +1,52 @@
+############################################################
+#
+# tomcat config
+#
+############################################################
+server:
+  port: 2000
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 80KB
+############################################################
+#
+# 配置数据源信息
+#
+############################################################
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://sh-cynosdbmysql-grp-42t4ch3s.sql.tencentcdb.com:26102/foodie-shop?useUnicode=true&characterEncoding=UTF-8&autoReconnec=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: Sunyu665767
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 600000
+      pool-name: DataSourceHikariCP
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+############################################################
+#
+# Mybatis config
+#
+#############################################################
+mybatis:
+  type-aliases-package: com.imooc.pojo
+  mapper-locations: classpath:mapper/*.xml
+############################################################
+#
+# 通用Mapper config
+#
+#############################################################
+mapper:
+  mappers: com.imooc.my.mapper.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+logging:
+  level:
+    com.imooc.mapper: trace
