@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.common.utils.PagedGridResult;
 import com.imooc.pojo.Carousel;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface CarouselService {
      * @return list
      */
     List<Carousel> queryAll(Integer isShow);
+
+
 }

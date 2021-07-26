@@ -46,7 +46,19 @@ mapper:
   mappers: com.imooc.my.mapper.MyMapper
   not-empty: false
   identity: MYSQL
-
+############################################################
+#
+# 分页插件配置
+#
+#############################################################
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+############################################################
+#
+# log config
+#
+#############################################################
 logging:
   level:
     com.imooc.mapper: trace
