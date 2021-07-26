@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.imooc.common.enums.CommentLevel;
 import com.imooc.common.utils.DesensitizationUtil;
 import com.imooc.common.utils.PagedGridResult;
@@ -11,16 +12,14 @@ import com.imooc.service.ItemService;
 import com.imooc.vo.CommentLevelCountsVO;
 import com.imooc.vo.ItemCommentVO;
 import com.imooc.vo.SearchItemsVO;
+import com.imooc.vo.ShopcartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -111,7 +110,7 @@ public class ItemServiceImpl implements ItemService {
 
         // mybatis-pagehelper
 
-        /**
+        /*
          * page: 第几页
          * pageSize: 每页显示条数
          */
@@ -159,4 +158,11 @@ public class ItemServiceImpl implements ItemService {
         return setterPagedGrid(items,page);
     }
 
+    @Override
+    public List<ShopcartVO> queryItemsBySpecIds(String specIds) {
+        String[] splitEnd = specIds.split(",");
+        ArrayList<String> specIdList = Lists.newArrayList();
+        Collections.addAll(specIdList,splitEnd);
+        return itemsMapperCustom.queryItemsBySpecIds(specIdList);
+    }
 }

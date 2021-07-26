@@ -1,14 +1,16 @@
 package com.imooc.controller;
 
 
-import com.imooc.common.enums.YesOrNoEnum;
 import com.imooc.common.utils.IMOOCJSONResult;
 import com.imooc.common.utils.PagedGridResult;
-import com.imooc.pojo.*;
-import com.imooc.service.CarouselService;
+import com.imooc.pojo.Items;
+import com.imooc.pojo.ItemsImg;
+import com.imooc.pojo.ItemsParam;
+import com.imooc.pojo.ItemsSpec;
 import com.imooc.service.ItemService;
 import com.imooc.vo.CommentLevelCountsVO;
 import com.imooc.vo.ItemInfoVO;
+import com.imooc.vo.ShopcartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -157,5 +159,19 @@ public class ItemsController extends BaseController {
         return IMOOCJSONResult.ok(grid);
     }
 
+    @ApiOperation(value = "根据商品规格ids查找最新的商品数据", notes = "根据商品规格ids查找最新的商品数据", httpMethod = "GET")
+    @GetMapping("/refresh")
+    public IMOOCJSONResult refresh(
+            @ApiParam(name = "itemSpecIds", value = "拼接的规格ids", required = true, example = "1001,1003,1005")
+            @RequestParam String itemSpecIds) {
+
+        if (StringUtils.isBlank(itemSpecIds)) {
+            return IMOOCJSONResult.ok();
+        }
+
+        List<ShopcartVO> list = itemService.queryItemsBySpecIds(itemSpecIds);
+        return IMOOCJSONResult.ok(list);
+
+    }
 
 }
