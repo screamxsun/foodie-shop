@@ -8,11 +8,13 @@ import com.imooc.service.AddressService;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class AddressImpl implements AddressService {
 
     @Autowired
